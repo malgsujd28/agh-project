@@ -1,5 +1,3 @@
-from enum import Enum
-
 from pydantic import BaseModel
 
 class CustomerCreateSchema(BaseModel):
@@ -37,41 +35,34 @@ class CustomerUpdateSchema(BaseModel):
 class Customer(CustomerCreateSchema):
     id: int
 
+class ProductCreateSchema(BaseModel):
+    price: float
+    name: str
+    description: str
 
+    class Config:
+        schema_extra = {
+            "example": {
+                "price": 27.0,
+                "name": "mug",
+                "description": "mug with capibara",
+            }
+        }
 
-# class StudentCreateSchema(BaseModel):
-#     first_name: str
-#     last_name: str
+class Product(ProductCreateSchema):
+    id:int
 
-#     class Config:
-#         schema_extra = {
-#             "example": {
-#                 "first_name": "Zbyszek",
-#                 "last_name": "Kieliszek",
-#             }
-#         }
+class OrderCreateSchema(BaseModel):
+    customer_id: int
+    products_id: list[int]
 
+    class Config:
+        schema_extra = {
+            "example": {
+                "customer_id": 0,
+                "products_id": [0, 1]
+            }
+        }
 
-# class StudentUpdateSchema(BaseModel):
-#     first_name: str | None
-#     last_name: str | None
-
-#     class Config:
-#         schema_extra = {
-#             "example": {
-#                 "first_name": "Zbysiu",
-#             }
-#         }
-
-
-# class Student(StudentCreateSchema):
-#     id: int
-
-
-# class Mark(float, Enum):
-#     BARDZO_DOBRY = 5.0
-#     DOBRY_PLUS = 4.5
-#     DOBRY = 4.0
-#     DOSTATECZNY_PLUS = 3.5
-#     DOSTATECZNY = 3.0
-#     NIEDOSTATECZNY = 2.0
+class Order(OrderCreateSchema):
+    id:int

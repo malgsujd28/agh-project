@@ -4,8 +4,15 @@ import { DataTable } from "./components/DataTable";
 import { Columns } from "./components/Columns";
 import { UserNav } from "./components/UserNav";
 import { navigationLinks } from "../../config/navigationLinks";
+import { useState, useEffect } from "react";
 
 export const CustomersPage = () => {
+  const [data, setData] = useState([]);
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/customers/")
+    .then((res) => res.json())
+    .then((data) => setData(data));
+  },[]);
   return (
     <div className="hidden flex-col md:flex">
       <div className="border-b">
@@ -22,14 +29,7 @@ export const CustomersPage = () => {
         </div>
         <div className="hidden h-full flex-1 flex-col space-y-8 md:flex">
           <DataTable
-            data={[
-              {
-                id: 1,
-                fullname: "Test",
-                email: "test@example.com",
-                phoneNumber: "000-000-000",
-              },
-            ]}
+            data={data}
             columns={Columns}
           />
         </div>

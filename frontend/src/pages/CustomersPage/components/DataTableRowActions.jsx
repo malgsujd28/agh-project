@@ -11,6 +11,7 @@ import {
   DropdownMenuShortcut,
   DropdownMenuTrigger,
 } from "@/components/ui/DropdownMenu";
+import { id } from "date-fns/locale";
 
 export function DataTableRowActions({ row }) {
   return (
@@ -26,16 +27,21 @@ export function DataTableRowActions({ row }) {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="w-[160px]">
         <DropdownMenuItem>
-          <Pen className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
-          Edit
+          <button>
+            <Pen className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
+            Edit
+          </button>
         </DropdownMenuItem>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
-          <Trash className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
-          Delete
+          <button>
+            <Trash className="mr-2 h-3.5 w-3.5 text-muted-foreground/70" />
+            Delete
+          </button>
           <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
 }
+
