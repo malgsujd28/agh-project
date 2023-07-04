@@ -51,6 +51,7 @@ async def update_customer(
 async def delete_customer(customer_id: int) -> None:
     try:
         del CUSTOMERS_STORAGE[customer_id]
+        
     except KeyError:
         raise HTTPException(
             status_code=404, detail=f"Customer with ID={customer_id} does not exist."
